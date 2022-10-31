@@ -1,13 +1,5 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { createServer } from "@graphql-yoga/node";
 
-type Data = {
-  name: string
-}
+const server = createServer();
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  res.status(200).json({ name: 'John Doe' })
-}
+export default server;
