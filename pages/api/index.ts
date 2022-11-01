@@ -1,8 +1,8 @@
 
 import { createServer } from "@graphql-yoga/node";
-
 import { join } from "path";
-import { readFileSync } from "fs";
+import { readFileSync } from "fs"
+import { Resolvers } from "../../types";
 
 const typeDefs = readFileSync(join(process.cwd(), "schema.graphql"), {
     encoding: "utf-8",
