@@ -7,7 +7,7 @@ import { Resolvers } from "../../types";
 const typeDefs = readFileSync(join(process.cwd(), "schema.graphql"), {
     encoding: "utf-8",
 })
-const resolvers = {
+const resolvers:Resolvers = {
     Query: {
       cart: (_, { id }) => {
         return {
