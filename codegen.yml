@@ -1,7 +1,10 @@
 overwrite: true
 schema: "schema.graphql"
+documents: null
 generates:
   types.ts:
+    config:
+      contextType: ./pages/api/index#GraphQLContext
     plugins:
       - "typescript"
       - "typescript-resolvers"

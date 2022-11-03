@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLContext } from './pages/api/index';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -117,17 +118,17 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
 };
 
-export type CartResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cart'] = ResolversParentTypes['Cart']> = {
+export type CartResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Cart'] = ResolversParentTypes['Cart']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   totalItems?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   cart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<QueryCartArgs, 'id'>>;
 };
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = GraphQLContext> = {
   Cart?: CartResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
