@@ -7,4 +7,5 @@ generates:
       contextType: ./pages/api/index#GraphQLContext
     plugins:
       - "typescript"
+      - "typescript-operations"
       - "typescript-resolvers"
