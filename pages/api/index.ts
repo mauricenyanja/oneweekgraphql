@@ -1,8 +1,12 @@
+import { PrismaClient } from '@prisma/client'
 
 import { createServer } from "@graphql-yoga/node";
 import { join } from "path";
 import { readFileSync } from "fs"
-import { Resolvers } from "../../types";
+import { Resolvers } from "../../types"
+
+import prisma from "../../lib/prisma"
+
 
 const typeDefs = readFileSync(join(process.cwd(), "schema.graphql"), {
     encoding: "utf-8",
@@ -27,4 +31,6 @@ const server = createServer({
     },
   });
 
-export default server;
+export type GraphQLContext = {
+    prisma: PrismaClient;
+  };
