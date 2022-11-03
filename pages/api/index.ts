@@ -3,7 +3,7 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import { Resolvers } from "../../types";
 import type { PrismaClient } from "@prisma/client";
-// import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from "../../lib/prisma";
 
