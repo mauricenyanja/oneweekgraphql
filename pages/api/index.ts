@@ -1,4 +1,4 @@
-import { createServer } from "@graphql-yoga/node";
+import { createServer, GraphQLYogaError } from "@graphql-yoga/node";
 import { join } from "path";
 import { readFileSync } from "fs";
 import currencyFormatter from "currency-formatter";
@@ -7,7 +7,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from "../../lib/prisma";
 import { Resolvers } from "../../types";
-import { findOrCreateCart } from "../../lib/cart";
+import { findOrCreateCart, validateCartItems } from "../../lib/cart";
+import { stripe } from "../../lib/stripe";
+import { origin } from "../../lib/client";
+import { products } from "../../lib/products";
 
 export type GraphQLContext = {
   prisma: PrismaClient;
@@ -52,6 +55,94 @@ const resolvers: Resolvers = {
         },
       });
       return cart;
+    },
+    removeItem: async (_, { input }, { prisma }) => {
+      const { cartId } = await prisma.cartItem.delete({
+        where: { id_cartId: { id: input.id, cartId: input.cartId } },
+        select: {
+          cartId: true,
+        },
+      });
+      return findOrCreateCart(prisma, cartId);
+    },
+    increaseCartItem: async (_, { input }, { prisma }) => {
+      const { cartId, quantity } = await prisma.cartItem.update({
+        data: {
+          quantity: {
+            increment: 1,
+          },
+        },
+        where: { id_cartId: { id: input.id, cartId: input.cartId } },
+        select: {
+          quantity: true,
+          cartId: true,
+        },
+      });
+      return findOrCreateCart(prisma, cartId);
+    },
+    decreaseCartItem: async (_, { input }, { prisma }) => {
+      const { cartId, quantity } = await prisma.cartItem.update({
+        data: {
+          quantity: {
+            decrement: 1,
+          },
+        },
+        where: { id_cartId: { id: input.id, cartId: input.cartId } },
+        select: {
+          quantity: true,
+          cartId: true,
+        },
+      });
+      // Allow users to decrease any number of times
+      if (quantity <= 0) {
+        await prisma.cartItem.update({
+          where: { id_cartId: { id: input.id, cartId: input.cartId } },
+          data: {
+            quantity: {
+              set: 0,
+            },
+          },
+        });
+      }
+      return findOrCreateCart(prisma, cartId);
+    },
+    createCheckoutSession: async (_, { input }, { prisma }) => {
+      const { cartId } = input;
+
+      const cart = await prisma.cart.findUnique({
+        where: { id: cartId },
+      });
+
+      if (!cart) {
+        throw new GraphQLYogaError("Invalid cart");
+      }
+
+      const cartItems = await prisma.cart
+        .findUnique({
+          where: { id: cartId },
+        })
+        .items();
+
+      if (!cartItems || cartItems.length === 0) {
+        throw new GraphQLYogaError("Cart is empty");
+      }
+
+      const line_items = validateCartItems(products, cartItems);
+
+      const session = await stripe.checkout.sessions.create({
+        success_url: `${origin}/thankyou?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/cart?cancelled=true`,
+        line_items,
+        metadata: {
+          cartId: cart.id,
+        },
+        mode: "payment",
+      });
+
+      return {
+        id: session.id,
+        url: session.url,
+      };
     },
   },
   Cart: {
@@ -111,7 +202,10 @@ const resolvers: Resolvers = {
   },
 };
 
-const server = createServer({
+const server = createServer<{
+  req: NextApiRequest;
+  res: NextApiResponse;
+}>({
   endpoint: "/api",
   schema: {
     typeDefs,
