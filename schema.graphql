@@ -46,3 +46,15 @@ input AddToCartInput {
   price: Int!
   quantity: Int = 1
 }
+
+input RemoveFromCartInput{
+  id:ID!
+  cartId:ID!
+}
+input DecreaseCartItemInput{
+  id:ID!
+  cartId:ID!
+}
+input CreateCheckoutSessionInput{
+  cartId:ID!
+}
