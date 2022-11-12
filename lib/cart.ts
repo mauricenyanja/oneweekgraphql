@@ -1,4 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient,CartItem } from "@prisma/client";
+import { Stripe } from "stripe";
+import { Product } from "./products"
+
+export const currencyCode = "USSD"
 
 export async function findOrCreateCart(prisma: PrismaClient, id: string) {
   let cart = await prisma.cart.findUnique({
