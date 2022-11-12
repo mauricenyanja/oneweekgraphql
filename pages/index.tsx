@@ -4,7 +4,7 @@ import { ProductList } from "../components/ProductList"
 import { Product, products } from "../lib/products"
 
 
-export const GetStaticProps:GetStaticProps<{
+export const getStaticProps:GetStaticProps<{
   products: Product[]
 }> = async () => ({
   props: {
