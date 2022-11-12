@@ -23,3 +23,31 @@ const Cart: NextPage<IProps> = ({ cartId }) => {
         },
      })
 
+     return (
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <main className="p-8 min-h-screen">
+            <div className="mx-auto max-w-xl space-y-8">
+              <h1 className="text-4xl">Cart</h1>
+              <CartError error={error} />
+              <CartDetail cart={data?.cart} />
+              <div>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    createCheckoutSession();
+                  }}
+                  disabled={creatingCheckoutSession}
+                  className="p-1 font-light border border-neutral-700 hover:bg-black hover:text-white w-full"
+                >
+                  {creatingCheckoutSession
+                    ? "Redirecting to Checkout"
+                    : "Go to Checkout"}
+                </button>
+              </div>
+            </div>
+          </main>
+        </div>
+      )
+    }
+    
