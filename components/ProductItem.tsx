@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { HTMLProps } from "react";
-import { Product } from "../lib/product";
+import { Product } from "../lib/products";
 
 export function ProductItem({
   product: { price, src, title },

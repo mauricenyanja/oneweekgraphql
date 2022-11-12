@@ -3,7 +3,7 @@ import { GetServerSideProps,InferGetServerSidePropsType,NextPage }
 
  import { Header } from "../../components/Header"
  import { ProductDetail } from "../../components/ProductDetail"
- import { Product, products } from "../../lib/product"
+ import { Product, products } from "../../lib/products"
  
 
  const ProductPage: NextPage<

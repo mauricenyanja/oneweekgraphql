@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Product } from "../lib/product"
+import { Product } from "../lib/products"
 import { ProductItem } from "./ProductItem"
 
 export function ProductList({ products }: { products:Product[] }){
