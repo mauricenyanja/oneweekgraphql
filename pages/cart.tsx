@@ -50,4 +50,7 @@ const Cart: NextPage<IProps> = ({ cartId }) => {
         </div>
       )
     }
-    
+
+interface IProps {
+    cartId:string;
+}
