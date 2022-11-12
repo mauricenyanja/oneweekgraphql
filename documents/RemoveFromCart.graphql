@@ -1,2 +1,6 @@
 
-mutation 
+mutation removeFromCart($input :RemoveFromCartInput!) {
+    removeItem(input: $input){
+        ...Cart
+    }
+}
