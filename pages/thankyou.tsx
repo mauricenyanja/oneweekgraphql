@@ -44,3 +44,9 @@ const ThankYou: NextPage<IProps> = ({ session }) => {
 interface IProps {
     session: Stripe.Checkout.Session | null
 }
+
+export const getServerSideProps:GetServerSideProps<IProps> = async ({
+    query,
+}) => {
+    
+}
