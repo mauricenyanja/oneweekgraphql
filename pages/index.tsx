@@ -11,8 +11,19 @@ export const getStaticProps:GetStaticProps<{
     products:products.slice(0,6)
   }
 })
-const Home: NextPage = () => {
-  return <h1 className="text-purple-500 text-xl">Hello world</h1>;
-};
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  products,
+}) =>{
+  return(
+    <div>
+      <Header/>
+      <main>
+        <section>
+          <ProductList products={products}/>
+        </section>
+      </main>
+    </div>
+  )
+}
 
 export default Home;
