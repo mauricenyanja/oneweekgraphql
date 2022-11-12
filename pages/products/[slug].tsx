@@ -16,7 +16,7 @@ import { GetServerSideProps,InferGetServerSidePropsType,NextPage }
  )
  export const getServerSideProps:GetServerSideProps<{
     product:Product | null;
- }> async ({ req,res,query }) =>{
+ }> = async ({ req,res,query }) =>{
     const product =
         products.find((product) => product.slug === query.slug) || null
     return { props: { product }}
