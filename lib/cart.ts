@@ -1,3 +1,4 @@
+import { CartItem } from './../types';
 import { PrismaClient,CartItem } from "@prisma/client";
 import { Stripe } from "stripe";
 import { Product } from "./products"
@@ -14,4 +15,11 @@ export async function findOrCreateCart(prisma: PrismaClient, id: string) {
     });
   }
   return cart;
+}
+
+export function validateCartItems(
+  inventory: Product[],
+  CartItems: CartItem[]
+): Stripe.Checkout.SessionCreateParams.LineItem[] {
+  
 }
