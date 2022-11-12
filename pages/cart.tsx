@@ -62,4 +62,4 @@ export const getServerSideProps: GetServerSideProps<IProp> = async ({
     const cartId = getCartId({req,res})
     return {props:{ cartId }}
 }
-export
+export default Cart
