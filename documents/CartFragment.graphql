@@ -15,5 +15,9 @@ fragment Cart on Cart {
             formatted
             amount
         }
+        lineTotal {
+            formatted
+            amount
+        }
     }
 }
