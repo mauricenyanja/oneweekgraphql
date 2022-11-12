@@ -8,5 +8,8 @@ import { stripe } from "../lib/stripe"
 import { useGetCartQuery } from "../types"
 
 const ThankYou: NextPage<IProps> = ({ session }) => {
-    
+    const { data } = useGetCartQuery({
+        variables: { id: session?.metadata?.cartId! },
+        skip: !session?.metadata?.cartId,
+    })
 }
