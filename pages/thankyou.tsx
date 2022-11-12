@@ -1,5 +1,4 @@
 import { removeCookies } from "cookies-next"
-import { isNullableType } from "graphql"
 import { GetServerSideProps, NextPage } from "next"
 import Router from "next/router"
 import Stripe from "stripe"
