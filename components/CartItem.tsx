@@ -9,3 +9,13 @@ import {
 import { CloseIcon } from "./CloseIcon"
 import { MinusIcon } from "./MinusIcon"
 import { PlusIcon } from "./PlusIcon"
+
+export function CartItem({
+    item,
+    cartId,
+    isReadOnly,
+}: {
+    item:CartItem,
+    cartId: string,
+    isReadOnly?: boolean
+})
