@@ -5,7 +5,7 @@ import { ProductItem } from "./ProductItem"
 export function ProductList({ products }: { products:Product[] }){
     return (
         <ul className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2">
-            {products.slice(0,6)[Symbol].map((product,index)=>(
+            {products.slice(0,6).map((product,index)=>(
                 <ProductLink key={index} product={product}/>
             ))}
         </ul>
