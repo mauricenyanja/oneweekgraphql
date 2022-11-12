@@ -1,4 +1,3 @@
-import { CartItem } from './../types';
 import { PrismaClient,CartItem } from "@prisma/client";
 import { Stripe } from "stripe";
 import { Product } from "./products"
