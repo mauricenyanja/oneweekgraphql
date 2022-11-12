@@ -23,6 +23,11 @@ export function Header() {
           </svg>
         </a>
       </Link>
+      <Link href="/cart">
+        <a className="">
+          <ShoppingCartIcon />
+        </a>
+      </Link>
     </nav>
   );
 }
