@@ -40,3 +40,7 @@ const ThankYou: NextPage<IProps> = ({ session }) => {
       </div>
     )
 }
+
+interface IProps {
+    session: Stripe.Checkout.Session | null
+}
