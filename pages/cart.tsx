@@ -54,3 +54,12 @@ const Cart: NextPage<IProps> = ({ cartId }) => {
 interface IProps {
     cartId:string;
 }
+
+export const getServerSideProps: GetServerSideProps<IProp> = async ({
+    req,
+    res,
+}) => {
+    const cartId = getCartId({req,res})
+    return {props:{ cartId }}
+}
+export
