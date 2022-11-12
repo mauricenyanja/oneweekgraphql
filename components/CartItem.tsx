@@ -18,4 +18,9 @@ export function CartItem({
     item:CartItem,
     cartId: string,
     isReadOnly?: boolean
-})
+}) {
+    const [increaseCartItem, { loading: increasingCartItem }] =
+    useIncreaseCartItemMutation({
+      refetchQueries: [GetCartDocument],
+    })
+}
