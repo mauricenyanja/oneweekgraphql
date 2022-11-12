@@ -1,4 +1,5 @@
 import { removeCookies } from "cookies-next"
+import { isNullableType } from "graphql"
 import { GetServerSideProps, NextPage } from "next"
 import Router from "next/router"
 import Stripe from "stripe"
@@ -48,5 +49,11 @@ interface IProps {
 export const getServerSideProps:GetServerSideProps<IProps> = async ({
     query,
 }) => {
-    
+    const sessionID = query.session_id
+    const session = 
+        typeof sessionId === "string"
+            ? await stripe.checkout.sessions.retrieve(sessionId)
+            : null
+    return { props:{ session } }
+
 }
