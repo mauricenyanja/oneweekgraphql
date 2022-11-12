@@ -1,0 +1,5 @@
+mutation decreaseCartItem($input:DecreaseCartItemInput!) {
+    decreaseCartItem(input: $input) {
+        ...Cart
+    }
+}
