@@ -55,7 +55,7 @@ interface IProps {
     cartId:string;
 }
 
-export const getServerSideProps: GetServerSideProps<IProp> = async ({
+export const getServerSideProps: GetServerSideProps<IProps> = async ({
     req,
     res,
 }) => {
