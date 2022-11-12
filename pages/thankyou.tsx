@@ -49,7 +49,7 @@ interface IProps {
 export const getServerSideProps:GetServerSideProps<IProps> = async ({
     query,
 }) => {
-    const sessionID = query.session_id
+    const sessionId = query.session_id
     const session = 
         typeof sessionId === "string"
             ? await stripe.checkout.sessions.retrieve(sessionId)
