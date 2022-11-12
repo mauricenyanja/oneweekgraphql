@@ -19,7 +19,7 @@ export async function findOrCreateCart(prisma: PrismaClient, id: string) {
 
 export function validateCartItems(
   inventory: Product[],
-  CartItems: CartItem[]
+  cartItems: CartItem[]
 ): Stripe.Checkout.SessionCreateParams.LineItem[] {
   const checkoutItems: Stripe.Checkout.SessionCreateParams.LineItem[] = []
 
