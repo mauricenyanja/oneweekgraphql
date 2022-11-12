@@ -5,5 +5,7 @@ import { ProductItem } from "./ProductItem"
 
 export function ProductDetail({ product }: { product:Product | null }) {
     const cartId = String(getCookie("cartId"))
-    const
+    const [addToCart, {loading}] = useAddToCartMutation({
+        refetchQueries: [GetCartDocument],
+    })
 }
