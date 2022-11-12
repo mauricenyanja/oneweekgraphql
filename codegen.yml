@@ -13,3 +13,4 @@ generates:
       - "typescript"
       - "typescript-resolvers"
       - "typescript-operations"
+      - "typescript-react-apollo"
