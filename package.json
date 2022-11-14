@@ -12,15 +12,18 @@
     "db:migrate": "prisma migrate dev"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
     "@graphql-yoga/node": "2.13.13",
     "@prisma/client": "4.5.0",
+    "cookies-next": "^2.1.1",
     "currency-formatter": "1.5.9",
     "graphql": "^16.6.0",
     "next": "13.0.0",
     "raw-body": "^2.5.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "stripe": "^8.201.0"
+    "stripe": "^8.201.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.13.8",
